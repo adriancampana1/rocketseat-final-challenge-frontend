@@ -27,8 +27,17 @@ export const Content = styled.div`
         }
     }
 
+    .image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     img {
         padding: 2.4rem;
+        width: 100%;
+        max-width: 39rem;
+        height: auto;
     }
 
     .content {
@@ -71,6 +80,10 @@ export const Content = styled.div`
         align-items: center;
         justify-content: center;
         gap: 2rem;
+
+        button {
+            width: 50%;
+        }
     }
 
     @media (min-width: 650px) {
@@ -78,11 +91,59 @@ export const Content = styled.div`
     }
 
     @media (min-width: 900px) {
-        padding: 8rem 8rem 4.8rem;
-        gap: 4.8rem;
+        padding: 4.8rem;
     }
 
     @media (min-width: 1100px) {
-        padding: 16.4rem 12rem 4.8rem;
+        padding: 2.4rem 12rem;
+
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4.7rem;
+            margin-top: 4rem;
+
+            .image-container {
+                img {
+                    padding: 0;
+                }
+            }
+
+            .content {
+                align-items: start;
+            }
+
+            .text-container {
+                align-items: start;
+
+                h1 {
+                    font-size: ${({ theme }) =>
+                        theme.FONTS.POPPINS_500_MEDIUM.SIZE};
+                    font-weight: ${({ theme }) =>
+                        theme.FONTS.POPPINS_500_MEDIUM.WEIGHT};
+                    line-height: ${({ theme }) =>
+                        theme.FONTS.POPPINS_500_MEDIUM.LINEHEIGHT};
+                }
+
+                p {
+                    text-align: start;
+                    font-size: ${({ theme }) =>
+                        theme.FONTS.POPPINS_300_REGULAR.SIZE};
+                    font-weight: ${({ theme }) =>
+                        theme.FONTS.POPPINS_300_REGULAR.WEIGHT};
+                    line-height: ${({ theme }) =>
+                        theme.FONTS.POPPINS_300_REGULAR.LINEHEIGHT};
+                }
+            }
+
+            .controllers {
+                width: 100%;
+                justify-content: start;
+                button {
+                    width: 50%;
+                }
+            }
+        }
     }
 `;
