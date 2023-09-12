@@ -9,14 +9,17 @@ import { PiPencilSimpleDuotone } from 'react-icons/pi';
 import { Stepper } from '../Stepper/';
 import { Button } from '../Button';
 
+import { useNavigate } from 'react-router-dom';
+
 export const Card = ({ isAdmin = false, title, description, image, price }) => {
     const [favorited, setFavorited] = useState(false);
+    const navigate = useNavigate();
 
     function handleFavorited() {
         favorited ? setFavorited(false) : setFavorited(true);
     }
     return (
-        <Container>
+        <Container onClick={() => navigate('/details')}>
             {isAdmin ? (
                 <PiPencilSimpleDuotone className="favorite"></PiPencilSimpleDuotone>
             ) : (
