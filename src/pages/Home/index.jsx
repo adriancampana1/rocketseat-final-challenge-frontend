@@ -13,6 +13,7 @@ export const Home = () => {
                 <Banner></Banner>
                 <Section title="Refeições"></Section>
                 <Section title="Pratos Principais"></Section>
+                <Section title="Sobremesas"></Section>
             </Content>
             <Footer></Footer>
         </Container>

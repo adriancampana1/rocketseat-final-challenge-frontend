@@ -5,7 +5,7 @@ export const Container = styled.div`
     text-align: center;
     border-radius: 5px;
     background-color: ${({ theme }) => theme.COLORS.DARK_1000};
-    width: 100%;
+    width: auto;
     color: ${({ theme }) => theme.COLORS.LIGHT_100};
     font-size: ${({ theme }) => theme.FONTS.POPPINS_100_MEDIUM.SIZE};
     font-weight: ${({ theme }) => theme.FONTS.POPPINS_100_MEDIUM.WEIGHT};
