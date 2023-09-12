@@ -10,7 +10,7 @@ import imageFood from '../../assets/images/food-image/mask-group-6.webp';
 
 import { FiChevronLeft } from 'react-icons/fi';
 
-export const Details = () => {
+export const Details = ({ isAdmin = false }) => {
     return (
         <Container>
             <Header></Header>
@@ -19,28 +19,38 @@ export const Details = () => {
                     <FiChevronLeft></FiChevronLeft>
                     <a href="/">voltar</a>
                 </div>
-                <img src={imageFood} alt="Imagem do alimento" />
-                <div className="content">
-                    <div className="text-container">
-                        <h1>Salada Ravanello</h1>
-                        <p>
-                            Rabanetes, folhas verdes e molho agridoce salpicados
-                            com gergelim.
-                        </p>
+                <main>
+                    <div className="image-container">
+                        <img src={imageFood} alt="Imagem do alimento" />
                     </div>
-                    <div className="tags">
-                        <Tag title="Alface"></Tag>
-                        <Tag title="Cebola"></Tag>
-                        <Tag title="Pão"></Tag>
-                        <Tag title="Pepino"></Tag>
-                        <Tag title="Rabanete"></Tag>
-                        <Tag title="Tomate"></Tag>
+                    <div className="content">
+                        <div className="text-container">
+                            <h1>Salada Ravanello</h1>
+                            <p>
+                                Rabanetes, folhas verdes e molho agridoce
+                                salpicados com gergelim.
+                            </p>
+                        </div>
+                        <div className="tags">
+                            <Tag title="Alface"></Tag>
+                            <Tag title="Cebola"></Tag>
+                            <Tag title="Pão"></Tag>
+                            <Tag title="Pepino"></Tag>
+                            <Tag title="Rabanete"></Tag>
+                            <Tag title="Tomate"></Tag>
+                        </div>
+                        <div className="controllers">
+                            {isAdmin ? (
+                                <Button title="Editar"></Button>
+                            ) : (
+                                <>
+                                    <Stepper></Stepper>
+                                    <Button title="Editar"></Button>
+                                </>
+                            )}
+                        </div>
                     </div>
-                </div>
-                <div className="controllers">
-                    <Stepper></Stepper>
-                    <Button title="Pedir"></Button>
-                </div>
+                </main>
             </Content>
             <Footer></Footer>
         </Container>
