@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Container } from './styles';
 
@@ -13,10 +14,12 @@ import { FiSearch, FiLogOut, FiMenu, FiX } from 'react-icons/fi';
 
 export const Header = ({ isAdmin = false }) => {
     const [open, setOpen] = useState(false);
+    const navigate = useNavigate();
 
     function handleMenuMobile() {
         open ? setOpen(false) : setOpen(true);
     }
+
     return (
         <Container>
             <div className={`mobile-header ${open ? '' : 'open'}`}>
@@ -45,7 +48,11 @@ export const Header = ({ isAdmin = false }) => {
                         icon={FiSearch}
                         placeholder="Busque por pratos ou ingredientes"
                     ></Input>
-                    {isAdmin ? <a href="/">Novo prato</a> : ''}
+                    {isAdmin ? (
+                        <a onClick={() => navigate('/new')}>Novo prato</a>
+                    ) : (
+                        ''
+                    )}
                     <a href="/">Sair</a>
                 </main>
             </div>
@@ -60,7 +67,7 @@ export const Header = ({ isAdmin = false }) => {
                     placeholder="Busque por pratos ou ingredientes"
                 ></Input>
                 {isAdmin ? (
-                    <OrderButton title="Novo prato"></OrderButton>
+                    <OrderButton title="Novo prato" isAdmin></OrderButton>
                 ) : (
                     <OrderButton title="Pedidos" quantity="0"></OrderButton>
                 )}

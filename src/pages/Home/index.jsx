@@ -8,7 +8,7 @@ import { Banner } from '../../components/Banner';
 export const Home = () => {
     return (
         <Container>
-            <Header></Header>
+            <Header isAdmin></Header>
             <Content>
                 <Banner></Banner>
                 <Section title="Refeições"></Section>

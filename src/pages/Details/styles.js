@@ -22,7 +22,7 @@ export const Content = styled.div`
         a,
         svg {
             color: ${({ theme }) => theme.COLORS.LIGHT_300};
-            font-weight: 600;
+            font-weight: 500;
             font-size: 2rem;
         }
     }
