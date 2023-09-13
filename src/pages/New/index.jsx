@@ -5,7 +5,8 @@ import { Header } from '../../components/Header';
 import { FileUpload } from '../../components/FileUpload';
 import { Input } from '../../components/Input';
 import { CustomSelect } from '../../components/CustomSelect';
-import { CustomTextSelect } from '../../components/CustomTextSelect';
+import { IngredientItem } from '../../components/IngredientItem';
+import { Ingredients } from '../../components/Ingredients';
 import { Textarea } from '../../components/Textarea';
 import { Button } from '../../components/Button';
 import { Footer } from '../../components/Footer';
@@ -14,10 +15,23 @@ import { FiChevronLeft } from 'react-icons/fi';
 
 export const New = () => {
     const [selectedImage, setSelectedImage] = useState(null);
+    const [ingredients, setIngredients] = useState([]);
+    const [newIngredient, setNewIngredient] = useState('');
 
     const handleImageChange = (file) => {
         setSelectedImage(file);
     };
+
+    function handleAddIngredient() {
+        setIngredients((prevState) => [...prevState, newIngredient]);
+        setNewIngredient('');
+    }
+
+    function handleRemoveIngredient(deleted) {
+        setIngredients((prevState) =>
+            prevState.filter((ingredient) => ingredient !== deleted)
+        );
+    }
     return (
         <Container>
             <Header isAdmin></Header>
@@ -59,8 +73,27 @@ export const New = () => {
                     </div>
                     <div className="col-2">
                         <div className="input-wrapper">
-                            <label htmlFor="">Ingredientes</label>
-                            <CustomTextSelect></CustomTextSelect>
+                            <label htmlFor="ingredients">Ingredientes</label>
+                            <div className="ingredients">
+                                {ingredients.map((ingredient, index) => (
+                                    <IngredientItem
+                                        key={index}
+                                        value={ingredient}
+                                        onClick={() =>
+                                            handleRemoveIngredient(ingredient)
+                                        }
+                                    ></IngredientItem>
+                                ))}
+                                <IngredientItem
+                                    isNew
+                                    placeholder="Novo ingrediente"
+                                    onChange={(e) =>
+                                        setNewIngredient(e.target.value)
+                                    }
+                                    value={newIngredient}
+                                    onClick={handleAddIngredient}
+                                ></IngredientItem>
+                            </div>
                         </div>
                         <div className="input-wrapper">
                             <label htmlFor="price">Preço</label>
