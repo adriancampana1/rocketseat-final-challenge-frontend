@@ -77,9 +77,9 @@ export const Content = styled.div`
                 display: flex;
                 flex-wrap: wrap;
                 gap: 0.5rem;
-                padding: 0.3rem;
                 height: auto;
                 background-color: ${({ theme }) => theme.COLORS.DARK_900};
+                padding: 0.3rem;
                 border-radius: 8px;
             }
         }
@@ -94,6 +94,16 @@ export const Content = styled.div`
 
             img {
                 width: 30%;
+            }
+        }
+
+        .button-wrapper {
+            display: flex;
+            gap: 1rem;
+
+            button:first-child {
+                color: ${({ theme }) => theme.COLORS.LIGHT_100};
+                background-color: ${({ theme }) => theme.COLORS.DARK_800};
             }
         }
     }

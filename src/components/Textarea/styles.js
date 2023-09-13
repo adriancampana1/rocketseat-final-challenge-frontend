@@ -8,4 +8,9 @@ export const Container = styled.textarea`
     background-color: ${({ theme }) => theme.COLORS.DARK_900};
     border: none;
     color: ${({ theme }) => theme.COLORS.LIGHT_400};
+
+    > textarea:focus {
+        outline: none;
+        border: none;
+    }
 `;
