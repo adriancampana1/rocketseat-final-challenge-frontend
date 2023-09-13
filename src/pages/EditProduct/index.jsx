@@ -13,7 +13,7 @@ import { Footer } from '../../components/Footer';
 
 import { FiChevronLeft } from 'react-icons/fi';
 
-export const New = () => {
+export const EditProduct = () => {
     const [selectedImage, setSelectedImage] = useState(null);
     const [ingredients, setIngredients] = useState([]);
     const [newIngredient, setNewIngredient] = useState('');
@@ -43,7 +43,7 @@ export const New = () => {
                     </div>
                 </header>
                 <form>
-                    <h1>Novo prato</h1>
+                    <h1>Editar prato</h1>
                     <div className="col-3">
                         <div className="input-wrapper">
                             <label htmlFor="upload-image">
@@ -64,7 +64,7 @@ export const New = () => {
                         </div>
                         <div className="input-wrapper">
                             <label htmlFor="name">Nome do prato</label>
-                            <Input placeholder="Ex: Salada Ceasar"></Input>
+                            <Input placeholder="Salada Caesar"></Input>
                         </div>
                         <div className="input-wrapper">
                             <label htmlFor="categories">Categoria</label>
@@ -97,14 +97,17 @@ export const New = () => {
                         </div>
                         <div className="input-wrapper">
                             <label htmlFor="price">Preço</label>
-                            <Input placeholder="R$0,00"></Input>
+                            <Input placeholder="R$40,00"></Input>
                         </div>
                     </div>
                     <div className="input-wrapper">
                         <label htmlFor="description">Descrição</label>
-                        <Textarea></Textarea>
+                        <Textarea>
+                            A Salada César é uma opção refrescante para o verão.
+                        </Textarea>
                     </div>
                     <div className="button-wrapper">
+                        <Button title="Excluir prato"></Button>
                         <Button title="Salvar alterações" loading></Button>
                     </div>
                 </form>

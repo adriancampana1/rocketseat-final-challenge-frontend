@@ -39,4 +39,9 @@ export const Container = styled.div`
             color: ${({ theme }) => theme.COLORS.LIGHT_300};
         }
     }
+
+    > input:focus {
+        outline: none;
+        border: none;
+    }
 `;

@@ -21,7 +21,6 @@ export const Container = styled.div`
     .input {
         height: 48px;
         width: 100%;
-        padding: 14px;
 
         display: flex;
         align-items: center;
@@ -36,6 +35,7 @@ export const Container = styled.div`
         svg {
             background-color: transparent;
             border: none;
+
             font-size: ${({ theme }) => theme.FONTS.ROBOTO_SMALL_REGULAR.SIZE};
             font-weight: ${({ theme }) =>
                 theme.FONTS.ROBOTO_SMALL_REGULAR.WEIGHT};
@@ -45,11 +45,19 @@ export const Container = styled.div`
 
         svg {
             color: ${({ theme }) => theme.COLORS.LIGHT_400};
+            font-size: ${({ theme }) => theme.FONTS.ROBOTO_SMALL_REGULAR.SIZE};
+            margin-left: 14px;
         }
 
         input {
             color: ${({ theme }) => theme.COLORS.LIGHT_100};
             width: 100%;
+            padding: 14px 0 14px 14px;
+        }
+
+        > input:focus {
+            outline: none;
+            border: none;
         }
 
         > input::placeholder {
