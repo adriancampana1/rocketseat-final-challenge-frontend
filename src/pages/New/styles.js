@@ -72,6 +72,18 @@ export const Content = styled.div`
             gap: 2.4rem;
         }
 
+        .col-2 {
+            .ingredients {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                height: auto;
+                background-color: ${({ theme }) => theme.COLORS.DARK_900};
+                padding: 1rem;
+                border-radius: 8px;
+            }
+        }
+
         .added-image {
             display: flex;
             flex-direction: column;
