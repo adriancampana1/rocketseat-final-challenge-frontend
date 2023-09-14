@@ -10,15 +10,11 @@ export const Container = styled.div`
 
 export const Content = styled.div`
     width: 100%;
-    padding: 2.4rem;
+    padding: 4.4rem 2.4rem 2.4rem;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 2.4rem;
-
-    @media (min-width: 650px) {
-        padding: 4rem;
-    }
+    gap: 4.8rem;
 
     @media (min-width: 900px) {
         padding: 8rem 8rem 4.8rem;

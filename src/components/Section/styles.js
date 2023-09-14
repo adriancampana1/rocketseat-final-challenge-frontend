@@ -11,10 +11,6 @@ export const Container = styled.div`
         line-height: 140%;
     }
 
-    /* .swiper-wrapper {
-        filter: brightness(0.5);
-    } */
-
     .swiper-button-next {
         background-image: url(${arrowRight});
         width: 20px;

@@ -47,8 +47,7 @@ export const Container = styled.div`
     }
 
     p {
-        font-family: 'Roboto', sans-serif;
-        font-size: 0.9rem;
+        font-size: 1rem;
         font-weight: 300;
         line-height: 140%;
     }

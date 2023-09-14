@@ -19,9 +19,12 @@ export const Card = ({ isAdmin = false, title, description, image, price }) => {
         favorited ? setFavorited(false) : setFavorited(true);
     }
     return (
-        <Container onClick={() => navigate('/details')}>
+        <Container>
             {isAdmin ? (
-                <PiPencilSimpleDuotone className="favorite"></PiPencilSimpleDuotone>
+                <PiPencilSimpleDuotone
+                    className="favorite"
+                    onClick={() => navigate('/edit')}
+                ></PiPencilSimpleDuotone>
             ) : (
                 <>
                     <AiOutlineHeart
@@ -34,12 +37,16 @@ export const Card = ({ isAdmin = false, title, description, image, price }) => {
                     ></AiFillHeart>
                 </>
             )}
-            <img src={image} />
-            <h3>
+            <img src={image} onClick={() => navigate('/details')} />
+            <h3 onClick={() => navigate('/details')}>
                 {title} <FiChevronRight></FiChevronRight>
             </h3>
-            <span className="description">{description}</span>
-            <p className="price">{price}</p>
+            <span className="description" onClick={() => navigate('/details')}>
+                {description}
+            </span>
+            <p className="price" onClick={() => navigate('/details')}>
+                {price}
+            </p>
             {isAdmin ? (
                 ''
             ) : (
