@@ -1,21 +1,18 @@
 import { styled } from 'styled-components';
 
 export const Container = styled.div`
-    padding: 10rem;
-    height: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
-    margin: 0 auto;
-    gap: 7rem;
-
-    max-width: 70rem;
-
+    height: 100vh;
+    gap: 4rem;
     form {
         display: flex;
         align-items: center;
         flex-direction: column;
         gap: 3.2rem;
+        min-width: 40rem;
 
         h1 {
             display: none;
@@ -32,14 +29,32 @@ export const Container = styled.div`
     }
 
     @media (max-width: 550px) {
-        padding: 5rem;
+        form {
+            min-width: none;
+            width: 100%;
+            padding: 0 6.5rem;
+
+            input {
+                width: 100%;
+            }
+        }
+    }
+
+    @media (max-width: 400px) {
+        gap: 4rem;
+
+        form {
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
     }
 
     @media (min-width: 900px) {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        max-width: max-content;
-
+        max-width: 111rem;
+        margin: 0 auto;
+        padding: 4rem;
         form {
             h1 {
                 display: block;
