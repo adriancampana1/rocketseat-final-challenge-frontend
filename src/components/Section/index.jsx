@@ -10,55 +10,10 @@ import food4 from '../../assets/images/food-image/mask-group-10.webp';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Card } from '../Card';
 
-export const Section = ({ title }) => {
+export const Section = ({ title, children }) => {
     const [slidePerView, setSlidePerView] = useState(1.5);
     const [navigationEnabled, setNavigationEnabled] = useState(false);
     const [overlayEnabled, setOverlayEnabled] = useState(false);
-
-    const data = [
-        {
-            id: '1',
-            title: 'Salada Ravanello',
-            description: 'Massa fresca com camarões e pesto.',
-            image: food1,
-            price: 'R$ 79,97',
-        },
-        {
-            id: '2',
-            title: 'Torradas de Parma',
-            description: 'Massa fresca com camarões e pesto.',
-            image: food2,
-            price: 'R$ 25,97',
-        },
-        {
-            id: '3',
-            title: 'Peachy pastrie',
-            description: 'Massa fresca com camarões e pesto.',
-            image: food3,
-            price: 'R$ 32,97',
-        },
-        {
-            id: '4',
-            title: 'Macarons',
-            description: 'Massa fresca com camarões e pesto.',
-            image: food4,
-            price: 'R$ 79,97',
-        },
-        {
-            id: '5',
-            title: 'Peachy pastrie',
-            description: 'Massa fresca com camarões e pesto.',
-            image: food3,
-            price: 'R$ 32,97',
-        },
-        {
-            id: '6',
-            title: 'Macarons',
-            description: 'Massa fresca com camarões e pesto.',
-            image: food4,
-            price: 'R$ 79,97',
-        },
-    ];
 
     useEffect(() => {
         function handleResize() {
@@ -122,19 +77,7 @@ export const Section = ({ title }) => {
                 ) : (
                     ''
                 )}
-                {data.map((item) => {
-                    return (
-                        <SwiperSlide key={item.id}>
-                            <Card
-                                title={item.title}
-                                description={item.description}
-                                image={item.image}
-                                price={item.price}
-                                isAdmin="true"
-                            ></Card>
-                        </SwiperSlide>
-                    );
-                })}
+                {children}
             </Swiper>
         </Container>
     );

@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import { Container, Content } from './styles';
 
 import { Header } from '../../components/Header';
@@ -11,13 +13,18 @@ import imageFood from '../../assets/images/food-image/mask-group-6.webp';
 import { FiChevronLeft } from 'react-icons/fi';
 
 export const Details = ({ isAdmin = false }) => {
+    const navigate = useNavigate();
+
+    function backToHome() {
+        navigate(-1);
+    }
     return (
         <Container>
             <Header></Header>
             <Content>
                 <div className="button-text">
                     <FiChevronLeft></FiChevronLeft>
-                    <a href="/">voltar</a>
+                    <a onClick={backToHome}>voltar</a>
                 </div>
                 <main>
                     <div className="image-container">

@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 
 export const Container = styled.div`
     display: grid;
-    grid-template-columns: 100vw;
+    grid-template-columns: 100%;
     grid-template-rows: auto 1fr auto;
     height: 100vh;
     width: 100%;
@@ -11,7 +11,6 @@ export const Container = styled.div`
 export const Content = styled.div`
     width: 100%;
     padding: 4.4rem 2.4rem 2.4rem;
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 4.8rem;

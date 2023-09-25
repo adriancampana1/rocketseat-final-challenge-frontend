@@ -20,6 +20,7 @@ export const FileUpload = ({ onChange }) => {
             <input
                 type="file"
                 accept="image"
+                name="image"
                 style={{ display: 'none' }}
                 ref={fileInputRef}
                 onChange={handleInputChange}

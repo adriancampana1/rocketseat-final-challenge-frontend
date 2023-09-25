@@ -10,10 +10,14 @@ import { Logo } from '../Logo';
 import { Input } from '../Input';
 import { OrderButton } from '../OrderButton';
 
+import { useAuth } from '../../hooks/auth';
+
 import { FiSearch, FiLogOut, FiMenu, FiX } from 'react-icons/fi';
 
 export const Header = ({ isAdmin = false }) => {
     const [open, setOpen] = useState(false);
+
+    const { signOut } = useAuth();
     const navigate = useNavigate();
 
     function handleMenuMobile() {
@@ -71,7 +75,11 @@ export const Header = ({ isAdmin = false }) => {
                 ) : (
                     <OrderButton title="Pedidos" quantity="0"></OrderButton>
                 )}
-                <FiLogOut className="logout"></FiLogOut>
+                <FiLogOut
+                    className="logout"
+                    onClick={signOut}
+                    cursor="pointer"
+                ></FiLogOut>
             </div>
         </Container>
     );

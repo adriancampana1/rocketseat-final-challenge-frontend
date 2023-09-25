@@ -7,20 +7,14 @@ export const Container = styled.div`
 
     .custom-select .react-select__option {
         font-family: 'Poppins', sans-serif;
+        font-size: 14px;
     }
 
     .custom-select .react-select__option--is-focused {
         background-color: ${({ theme }) => theme.COLORS.DARK_600};
     }
 
-    .custom-select .react-select__multi-value {
-        background-color: ${({ theme }) => theme.COLORS.DARK_600};
-        color: ${({ theme }) => theme.COLORS.LIGHT_400};
-        padding: 0.5rem;
-        border-radius: 10px;
-    }
-
-    .custom-select .react-select__multi-value__label {
-        color: ${({ theme }) => theme.COLORS.LIGHT_400};
+    .custom-select .react-select__single-value {
+        color: ${({ theme }) => theme.COLORS.LIGHT_300};
     }
 `;

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Container, Content } from './styles';
 
 import { Header } from '../../components/Header';
@@ -18,6 +19,8 @@ export const EditProduct = () => {
     const [ingredients, setIngredients] = useState([]);
     const [newIngredient, setNewIngredient] = useState('');
 
+    const navigate = useNavigate();
+
     const handleImageChange = (file) => {
         setSelectedImage(file);
     };
@@ -32,6 +35,10 @@ export const EditProduct = () => {
             prevState.filter((ingredient) => ingredient !== deleted)
         );
     }
+
+    function backToHome() {
+        navigate(-1);
+    }
     return (
         <Container>
             <Header isAdmin></Header>
@@ -39,7 +46,7 @@ export const EditProduct = () => {
                 <header>
                     <div className="button-text">
                         <FiChevronLeft></FiChevronLeft>
-                        <a href="/">voltar</a>
+                        <a onClick={backToHome}>voltar</a>
                     </div>
                 </header>
                 <form>

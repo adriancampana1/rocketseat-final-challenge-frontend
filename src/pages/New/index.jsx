@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Container, Content } from './styles';
+import { useNavigate } from 'react-router-dom';
 
 import { Header } from '../../components/Header';
 import { FileUpload } from '../../components/FileUpload';
@@ -13,14 +14,22 @@ import { Footer } from '../../components/Footer';
 
 import { FiChevronLeft } from 'react-icons/fi';
 
+import { api } from '../../services/api';
+
 export const New = () => {
     const [selectedImage, setSelectedImage] = useState(null);
+    const [title, setTitle] = useState('');
+    const [category, setCategory] = useState(null);
     const [ingredients, setIngredients] = useState([]);
     const [newIngredient, setNewIngredient] = useState('');
+    const [price, setPrice] = useState('');
+    const [description, setDescription] = useState();
 
-    const handleImageChange = (file) => {
+    const navigate = useNavigate();
+
+    function handleImageChange(file) {
         setSelectedImage(file);
-    };
+    }
 
     function handleAddIngredient() {
         setIngredients((prevState) => [...prevState, newIngredient]);
@@ -32,6 +41,36 @@ export const New = () => {
             prevState.filter((ingredient) => ingredient !== deleted)
         );
     }
+
+    function handleTextareaChange(value) {
+        setDescription(value);
+    }
+
+    function handleSelectChange(category) {
+        setCategory(category.value);
+    }
+
+    async function handleAddProduct() {
+        if (!title || !price || !description || !category) {
+            return console.log(selectedImage);
+        }
+
+        const data = new FormData();
+        data.append('title', title);
+        data.append('description', description);
+        data.append('price', price);
+        data.append('category', category);
+        data.append('ingredients', ingredients);
+        data.append('image', selectedImage);
+        await api.post('/products', data);
+
+        alert('Produto criado com sucesso!');
+        navigate('/');
+    }
+
+    function backToHome() {
+        navigate(-1);
+    }
     return (
         <Container>
             <Header isAdmin></Header>
@@ -39,7 +78,7 @@ export const New = () => {
                 <header>
                     <div className="button-text">
                         <FiChevronLeft></FiChevronLeft>
-                        <a href="/">voltar</a>
+                        <a onClick={backToHome}>voltar</a>
                     </div>
                 </header>
                 <form>
@@ -49,6 +88,7 @@ export const New = () => {
                             <label htmlFor="upload-image">
                                 Imagem do prato
                             </label>
+
                             <FileUpload
                                 onChange={handleImageChange}
                             ></FileUpload>
@@ -64,11 +104,16 @@ export const New = () => {
                         </div>
                         <div className="input-wrapper">
                             <label htmlFor="name">Nome do prato</label>
-                            <Input placeholder="Ex: Salada Ceasar"></Input>
+                            <Input
+                                placeholder="Ex: Salada Ceasar"
+                                onChange={(e) => setTitle(e.target.value)}
+                            ></Input>
                         </div>
                         <div className="input-wrapper">
-                            <label htmlFor="categories">Categoria</label>
-                            <CustomSelect></CustomSelect>
+                            <label htmlFor="categories">Categorias</label>
+                            <CustomSelect
+                                selectedValueChange={handleSelectChange}
+                            ></CustomSelect>
                         </div>
                     </div>
                     <div className="col-2">
@@ -85,7 +130,7 @@ export const New = () => {
                                     ></IngredientItem>
                                 ))}
                                 <IngredientItem
-                                    isNew
+                                    isnew="true"
                                     placeholder="Novo ingrediente"
                                     onChange={(e) =>
                                         setNewIngredient(e.target.value)
@@ -97,15 +142,23 @@ export const New = () => {
                         </div>
                         <div className="input-wrapper">
                             <label htmlFor="price">Preço</label>
-                            <Input placeholder="R$0,00"></Input>
+                            <Input
+                                placeholder="R$0,00"
+                                onChange={(e) => setPrice(e.target.value)}
+                            ></Input>
                         </div>
                     </div>
                     <div className="input-wrapper">
-                        <label htmlFor="description">Descrição</label>
-                        <Textarea></Textarea>
+                        <label htmFor="description">Descrição</label>
+                        <Textarea
+                            onTextareaChange={handleTextareaChange}
+                        ></Textarea>
                     </div>
                     <div className="button-wrapper">
-                        <Button title="Salvar alterações" loading></Button>
+                        <Button
+                            title="Salvar alterações"
+                            onClick={handleAddProduct}
+                        ></Button>
                     </div>
                 </form>
             </Content>

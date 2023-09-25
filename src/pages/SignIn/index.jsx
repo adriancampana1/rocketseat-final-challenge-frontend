@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { Container } from './styles';
 
 import logo_user from '../../assets/images/logo/logo-user.svg';
@@ -5,8 +7,18 @@ import logo_user from '../../assets/images/logo/logo-user.svg';
 import { Logo } from '../../components/Logo';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
+import { useAuth } from '../../hooks/auth';
 
 export const SignIn = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const { signIn } = useAuth();
+
+    function handleSignIn() {
+        signIn({ email, password });
+    }
+
     return (
         <Container>
             <Logo
@@ -18,9 +30,15 @@ export const SignIn = () => {
                 <Input
                     label="Email"
                     placeholder="Exemplo: exemplo@exemplo.com"
+                    onChange={(e) => setEmail(e.target.value)}
                 ></Input>
-                <Input label="Senha" placeholder="Mínimo 6 caracteres"></Input>
-                <Button title="Entrar"></Button>
+                <Input
+                    label="Senha"
+                    type="password"
+                    placeholder="Mínimo 6 caracteres"
+                    onChange={(e) => setPassword(e.target.value)}
+                ></Input>
+                <Button title="Entrar" onClick={handleSignIn}></Button>
                 <a href="/register">Criar conta</a>
             </form>
         </Container>
