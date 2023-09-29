@@ -13,7 +13,6 @@ function AuthProvider({ children }) {
 
             localStorage.setItem('@foodexplorer:user', JSON.stringify(user));
             localStorage.setItem('@foodexplorer:token', token);
-            localStorage.setItem('@foodexplorer:role', user_role);
 
             api.defaults.headers.authorization = `Bearer ${token}`;
             setData({ user, token, user_role });
@@ -29,7 +28,6 @@ function AuthProvider({ children }) {
     function signOut() {
         localStorage.removeItem('@foodexplorer:user');
         localStorage.removeItem('@foodexplorer:token');
-        localStorage.removeItem('@foodexplorer:role');
 
         setData({});
     }
