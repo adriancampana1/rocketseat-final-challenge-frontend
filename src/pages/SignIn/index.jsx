@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import { Container } from './styles';
 
 import logo_user from '../../assets/images/logo/logo-user.svg';
@@ -39,7 +41,9 @@ export const SignIn = () => {
                     onChange={(e) => setPassword(e.target.value)}
                 ></Input>
                 <Button title="Entrar" onClick={handleSignIn}></Button>
-                <a href="/register">Criar conta</a>
+                <a>
+                    <Link to="/register">Criar conta</Link>
+                </a>
             </form>
         </Container>
     );
