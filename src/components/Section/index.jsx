@@ -1,14 +1,10 @@
+import React, { Children } from 'react';
+
 import { Container, Overlay, RightOverlay } from './styles';
 
 import { useEffect, useState } from 'react';
 
-import food1 from '../../assets/images/food-image/Mask-group-1_1.webp';
-import food2 from '../../assets/images/food-image/Mask-group-2.webp';
-import food3 from '../../assets/images/food-image/Mask-group-4_1.webp';
-import food4 from '../../assets/images/food-image/mask-group-10.webp';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Card } from '../Card';
 
 export const Section = ({ title, children }) => {
     const [slidePerView, setSlidePerView] = useState(1.5);
@@ -49,6 +45,10 @@ export const Section = ({ title, children }) => {
                     setOverlayEnabled(false);
                     break;
             }
+
+            const numberOfSlides = React.Children.count(children);
+
+            setOverlayEnabled(numberOfSlides >= 2);
         }
 
         handleResize();
@@ -58,7 +58,7 @@ export const Section = ({ title, children }) => {
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    }, []);
+    }, [children]);
 
     return (
         <Container>

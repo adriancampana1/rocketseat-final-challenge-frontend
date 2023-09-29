@@ -14,11 +14,23 @@ import { useAuth } from '../../hooks/auth';
 
 import { FiSearch, FiLogOut, FiMenu, FiX } from 'react-icons/fi';
 
-export const Header = ({ isAdmin = false }) => {
+export const Header = ({ isAdmin = false, onSearchValueChange }) => {
     const [open, setOpen] = useState(false);
+    const [searchValue, setSearchValue] = useState('');
+
+    const searchValueChange = (e) => {
+        const value = e.target.value;
+        setSearchValue(value);
+        onSearchValueChange(value);
+    };
 
     const { signOut } = useAuth();
     const navigate = useNavigate();
+
+    function handleSignOut() {
+        signOut();
+        navigate('/');
+    }
 
     function handleMenuMobile() {
         open ? setOpen(false) : setOpen(true);
@@ -50,6 +62,8 @@ export const Header = ({ isAdmin = false }) => {
                 <main>
                     <Input
                         icon={FiSearch}
+                        value={searchValue}
+                        onChange={searchValueChange}
                         placeholder="Busque por pratos ou ingredientes"
                     ></Input>
                     {isAdmin ? (
@@ -57,17 +71,19 @@ export const Header = ({ isAdmin = false }) => {
                     ) : (
                         ''
                     )}
-                    <a href="/">Sair</a>
+                    <a onClick={handleSignOut}>Sair</a>
                 </main>
             </div>
             <div className="desktop-header">
                 {isAdmin ? (
                     <Logo image={logo_user_admin}></Logo>
                 ) : (
-                    <Logo image={logo_user_admin}></Logo>
+                    <Logo image={logo_user}></Logo>
                 )}
                 <Input
                     icon={FiSearch}
+                    value={searchValue}
+                    onChange={searchValueChange}
                     placeholder="Busque por pratos ou ingredientes"
                 ></Input>
                 {isAdmin ? (
@@ -77,7 +93,7 @@ export const Header = ({ isAdmin = false }) => {
                 )}
                 <FiLogOut
                     className="logout"
-                    onClick={signOut}
+                    onClick={handleSignOut}
                     cursor="pointer"
                 ></FiLogOut>
             </div>

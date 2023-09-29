@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { Container } from './styles';
 
@@ -10,20 +11,40 @@ import { Stepper } from '../Stepper/';
 import { Button } from '../Button';
 
 import { useNavigate } from 'react-router-dom';
+import { api } from '../../services/api';
 
-export const Card = ({ isAdmin = false, title, description, image, price }) => {
+export const Card = ({
+    isAdmin = false,
+    title,
+    description,
+    image,
+    price,
+    id,
+}) => {
     const [favorited, setFavorited] = useState(false);
+    const [productImage, setProductImage] = useState('');
+
     const navigate = useNavigate();
 
     function handleFavorited() {
         favorited ? setFavorited(false) : setFavorited(true);
     }
+
+    function handleDetails() {
+        navigate(`/details/${id}`);
+    }
+
+    useEffect(() => {
+        const imageURL = `${api.defaults.baseURL}/files/${image}`;
+        setProductImage(imageURL);
+    }, [image]);
+
     return (
         <Container>
             {isAdmin ? (
                 <PiPencilSimpleDuotone
                     className="favorite"
-                    onClick={() => navigate('/edit')}
+                    onClick={() => navigate(`/edit/${id}`)}
                 ></PiPencilSimpleDuotone>
             ) : (
                 <>
@@ -37,14 +58,14 @@ export const Card = ({ isAdmin = false, title, description, image, price }) => {
                     ></AiFillHeart>
                 </>
             )}
-            <img src={image} onClick={() => navigate('/details')} />
-            <h3 onClick={() => navigate('/details')}>
+            <img src={productImage} onClick={handleDetails} />
+            <h3 onClick={handleDetails}>
                 {title} <FiChevronRight></FiChevronRight>
             </h3>
-            <span className="description" onClick={() => navigate('/details')}>
+            <span className="description" onClick={handleDetails}>
                 {description}
             </span>
-            <p className="price" onClick={() => navigate('/details')}>
+            <p className="price" onClick={handleDetails}>
                 {price}
             </p>
             {isAdmin ? (

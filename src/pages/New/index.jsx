@@ -51,8 +51,8 @@ export const New = () => {
     }
 
     async function handleAddProduct() {
-        if (!title || !price || !description || !category) {
-            return console.log(selectedImage);
+        if (!title || !price || !description || !category || !selectedImage) {
+            alert('Insira todos os campos!');
         }
 
         const data = new FormData();

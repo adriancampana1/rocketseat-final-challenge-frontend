@@ -1,4 +1,5 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 import { Container, Content } from './styles';
 
@@ -8,57 +9,93 @@ import { Stepper } from '../../components/Stepper';
 import { Button } from '../../components/Button';
 import { Tag } from '../../components/Tag';
 
-import imageFood from '../../assets/images/food-image/mask-group-6.webp';
-
 import { FiChevronLeft } from 'react-icons/fi';
 
-export const Details = ({ isAdmin = false }) => {
-    const navigate = useNavigate();
+import { api } from '../../services/api';
+import { useAuth } from '../../hooks/auth';
 
-    function backToHome() {
-        navigate(-1);
+export const Details = () => {
+    const [data, setData] = useState(null);
+    const [image, setImage] = useState('');
+
+    const { isAdmin } = useAuth();
+
+    const navigate = useNavigate();
+    const params = useParams();
+
+    function handleBackToHome() {
+        navigate('/');
     }
+
+    function handleGoToEdit() {
+        navigate(`/edit/${params.id}`);
+    }
+
+    useEffect(() => {
+        async function fetchProduct() {
+            try {
+                const response = await api.get(`products/${params.id}`);
+                setData(response.data);
+
+                const imageURL = `${api.defaults.baseURL}/files/${response.data.image}`;
+                setImage(imageURL);
+            } catch (error) {
+                console.log('Erro: ', error);
+            }
+        }
+
+        fetchProduct();
+    }, []);
+
     return (
         <Container>
-            <Header></Header>
-            <Content>
-                <div className="button-text">
-                    <FiChevronLeft></FiChevronLeft>
-                    <a onClick={backToHome}>voltar</a>
-                </div>
-                <main>
-                    <div className="image-container">
-                        <img src={imageFood} alt="Imagem do alimento" />
+            {isAdmin() ? <Header isAdmin></Header> : <Header></Header>}
+            {data && (
+                <Content>
+                    <div className="button-text">
+                        <FiChevronLeft></FiChevronLeft>
+                        <a onClick={handleBackToHome}>voltar</a>
                     </div>
-                    <div className="content">
-                        <div className="text-container">
-                            <h1>Salada Ravanello</h1>
-                            <p>
-                                Rabanetes, folhas verdes e molho agridoce
-                                salpicados com gergelim.
-                            </p>
+                    <main>
+                        <div className="image-container">
+                            <img src={image} alt="Imagem do alimento" />
                         </div>
-                        <div className="tags">
-                            <Tag title="Alface"></Tag>
-                            <Tag title="Cebola"></Tag>
-                            <Tag title="Pão"></Tag>
-                            <Tag title="Pepino"></Tag>
-                            <Tag title="Rabanete"></Tag>
-                            <Tag title="Tomate"></Tag>
+                        <div className="content">
+                            <div className="text-container">
+                                <h1>{data.title}</h1>
+                                <p>{data.description}</p>
+                            </div>
+                            <div className="tags">
+                                {data.ingredients && (
+                                    <>
+                                        {data.ingredients.map(
+                                            (ingredient, index) => (
+                                                <Tag
+                                                    title={ingredient.title}
+                                                    key={index}
+                                                ></Tag>
+                                            )
+                                        )}
+                                    </>
+                                )}
+                            </div>
+                            <div className="controllers">
+                                {isAdmin() ? (
+                                    <Button
+                                        title="Editar"
+                                        onClick={handleGoToEdit}
+                                    ></Button>
+                                ) : (
+                                    <>
+                                        <Stepper></Stepper>
+                                        <Button title="Incluir"></Button>
+                                    </>
+                                )}
+                            </div>
                         </div>
-                        <div className="controllers">
-                            {isAdmin ? (
-                                <Button title="Editar"></Button>
-                            ) : (
-                                <>
-                                    <Stepper></Stepper>
-                                    <Button title="Editar"></Button>
-                                </>
-                            )}
-                        </div>
-                    </div>
-                </main>
-            </Content>
+                    </main>
+                </Content>
+            )}
             <Footer></Footer>
         </Container>
     );

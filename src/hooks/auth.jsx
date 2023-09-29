@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-
 import { api } from '../services/api';
 
 export const AuthContext = createContext({});
@@ -10,13 +9,14 @@ function AuthProvider({ children }) {
     async function signIn({ email, password }) {
         try {
             const response = await api.post('/sessions', { email, password });
-            const { user, token } = response.data;
+            const { user, token, user_role } = response.data;
 
             localStorage.setItem('@foodexplorer:user', JSON.stringify(user));
             localStorage.setItem('@foodexplorer:token', token);
+            localStorage.setItem('@foodexplorer:role', user_role);
 
             api.defaults.headers.authorization = `Bearer ${token}`;
-            setData({ user, token });
+            setData({ user, token, user_role });
         } catch (error) {
             if (error.response) {
                 alert(error.response.data.message);
@@ -29,8 +29,19 @@ function AuthProvider({ children }) {
     function signOut() {
         localStorage.removeItem('@foodexplorer:user');
         localStorage.removeItem('@foodexplorer:token');
+        localStorage.removeItem('@foodexplorer:role');
 
         setData({});
+    }
+
+    function isAdmin() {
+        const role = localStorage.getItem('@foodexplorer:role');
+        return role === '1';
+    }
+
+    function isUser() {
+        const role = localStorage.getItem('@foodexplorer:role');
+        return role === '0';
     }
 
     useEffect(() => {
@@ -43,12 +54,21 @@ function AuthProvider({ children }) {
             setData({
                 token,
                 user: JSON.parse(user),
+                isAdmin,
+                isUser,
             });
         }
     }, []);
 
     return (
-        <AuthContext.Provider value={{ signIn, signOut, user: data.user }}>
+        <AuthContext.Provider
+            value={{
+                signIn,
+                signOut,
+                user: data.user,
+                isAdmin,
+            }}
+        >
             {children}
         </AuthContext.Provider>
     );
