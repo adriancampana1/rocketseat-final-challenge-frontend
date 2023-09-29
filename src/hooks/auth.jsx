@@ -33,12 +33,12 @@ function AuthProvider({ children }) {
     }
 
     function isAdmin() {
-        const role = localStorage.getItem('@foodexplorer:role');
+        const role = data.user_role;
         return role === '1';
     }
 
     function isUser() {
-        const role = localStorage.getItem('@foodexplorer:role');
+        const role = data.user_role;
         return role === '0';
     }
 
