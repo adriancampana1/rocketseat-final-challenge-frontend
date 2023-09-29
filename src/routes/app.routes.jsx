@@ -4,7 +4,6 @@ import { Home } from '../pages/Home';
 import { Details } from '../pages/Details';
 import { New } from '../pages/New';
 import { EditProduct } from '../pages/EditProduct';
-import { Teste } from '../pages/Teste';
 
 export function AppRoutes() {
     return (
