@@ -4,7 +4,7 @@
 
 <p align="start">Este é o repositório do front-end da aplicação FoodExplorer, desenvolvido como parte do desafio final do curso Explorer da Rocketseat. O FoodExplorer é um sistema de gestão de cardápio para restaurantes, permitindo aos proprietários de restaurantes adicionar, atualizar, ler e deletar produtos do seu menu.</p>
 
-Deploy Netlify:
+Deploy da aplicação no Netlify:
 [![Netlify Status](https://api.netlify.com/api/v1/badges/74f80755-61f5-495b-8a99-b822d1f3da38/deploy-status)](https://app.netlify.com/sites/final-challenge-rocketseat/deploys)
 
 <h4 align="center">Finalizado ✅😎</h4>
@@ -13,7 +13,7 @@ Deploy Netlify:
 
 ```bash
 # Clone este repositório
-$ git clone <https://github.com/adriancampana1/rocketseat-final-challenge-backend.git>
+$ git clone <https://github.com/adriancampana1/rocketseat-final-challenge-frontend.git>
 
 # Acesse a pasta do projeto no terminal/cmd
 $ cd food-explorer
